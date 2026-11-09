@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dapur Mama Ainun – Pie Susu Lontar, Sambal Cumi, Kelapa Tart &amp; Tumpeng</title>
+  <meta name="description" content="Dapur Mama Ainun menerima pesanan pie susu lontar, sambal cumi, kelapa tart, dan tumpeng untuk keluarga dan acara. Pesan lewat WhatsApp.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* ===== 1. WARNA & FONT (ubah di sini) ===== */
+    :root {
+      --leaf: #1f4d3a;      /* hijau daun pisang: header, footer */
+      --leaf-soft: #e9f1e6; /* hijau muda: latar section */
+      --turmeric: #f2b705;  /* kuning kunyit: tombol */
+      --chili: #c8321e;     /* merah cabai: harga, label penting */
+      --paper: #fffef9;     /* latar halaman */
+      --ink: #26302b;       /* teks utama */
+      --muted: #5f6b64;     /* teks pendukung */
+      --font-head: "Young Serif", Georgia, serif;
+      --font-body: "Nunito Sans", system-ui, sans-serif;
+    }
+
+    /* ===== 2. DASAR ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); color: var(--ink); background: var(--paper); line-height: 1.65; }
+    a { color: inherit; }
+    :focus-visible { outline: 3px solid var(--chili); outline-offset: 3px; }
+    .container { width: min(1040px, 100% - 2.5rem); margin-inline: auto; }
+    section { padding: 4rem 0; }
+    h1, h2, h3 { font-family: var(--font-head); font-weight: 400; line-height: 1.2; }
+    h2 { font-size: clamp(1.7rem, 4.5vw, 2.4rem); margin-bottom: .5rem; }
+    .lead { color: var(--muted); max-width: 56ch; }
+
+    .btn {
+      display: inline-block; padding: .8rem 1.4rem; border-radius: 10px;
+      background: var(--turmeric); color: #2b2100; font-weight: 800; text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 14px rgba(0,0,0,.15); }
+    .btn-small { padding: .5rem 1rem; font-size: .9rem; }
+
+    /* ===== 3. HEADER + HERO ===== */
+    .hero { background: var(--leaf); color: #fff; padding: 1.2rem 0 4.5rem; }
+    .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 3.5rem; }
+    .brand { font-family: var(--font-head); font-size: 1.2rem; text-decoration: none; }
+    .topbar a.wa { font-weight: 800; text-decoration: none; color: var(--turmeric); }
+    .hero h1 { font-size: clamp(2.4rem, 8vw, 4.4rem); max-width: 14ch; margin-bottom: 1rem; }
+    .hero p { max-width: 48ch; opacity: .92; margin-bottom: 1.8rem; font-size: 1.05rem; }
+    .hero .menu-line { margin-top: 2rem; font-size: .95rem; opacity: .8; }
+
+    /* ===== 4. PRODUK ===== */
+    /* Setiap produk: kotak warna di kiri (pengganti foto) + teks di kanan */
+    .product {
+      display: grid; gap: 1.2rem; padding: 1.6rem 0;
+      border-bottom: 1px solid #d9e2d6;
+    }
+    .product:last-child { border-bottom: 0; }
+    .thumb {
+      aspect-ratio: 4 / 3; border-radius: 14px; display: grid; place-items: center;
+      font-family: var(--font-head); font-size: 2.6rem; color: rgba(255,255,255,.92);
+    }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
+    .t-pie    { background: #d99a3d; }
+    .t-sambal { background: var(--chili); }
+    .t-kelapa { background: #6f9c7a; }
+    .t-tumpeng{ background: #b88a00; }
+    .product h3 { font-size: 1.4rem; margin-bottom: .3rem; }
+    .product p { color: var(--muted); margin-bottom: .6rem; }
+    .price { color: var(--chili); font-weight: 800; margin-bottom: .9rem; }
+    .note { font-size: .9rem; color: var(--muted); }
+
+    /* ===== 5. CARA PESAN (ini memang urutan langkah) ===== */
+    .how { background: var(--leaf-soft); }
+    .how ol { margin-top: 1.5rem; padding-left: 1.3rem; display: grid; gap: .9rem; max-width: 60ch; }
+    .how li::marker { color: var(--chili); font-weight: 800; }
+
+    /* ===== 6. TENTANG ===== */
+    .about p { max-width: 62ch; color: var(--muted); margin-top: .5rem; }
+
+    /* ===== 7. KONTAK + FOOTER ===== */
+    .contact { background: var(--leaf); color: #fff; text-align: center; }
+    .contact p { max-width: 46ch; margin: 0 auto 1.5rem; opacity: .92; }
+    footer { background: #173a2b; color: rgba(255,255,255,.7); text-align: center; padding: 1.2rem 0; font-size: .9rem; }
+
+    /* ===== 8. LAYAR LEBAR (min. 700px) ===== */
+    @media (min-width: 700px) {
+      .product { grid-template-columns: 240px 1fr; gap: 2rem; align-items: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="hero">
+    <div class="container">
+      <div class="topbar">
+        <a class="brand" href="#">Dapur Mama Ainun</a>
+        <!-- GANTI 6282198827773 dengan nomor WhatsApp asli (awali 62, tanpa 0 atau +) -->
+        <a class="wa" href="https://wa.me/6282198827773">Chat WhatsApp</a>
+      </div>
+
+      <h1>Masakan rumahan Mama Ainun.</h1>
+      <p>Pie susu lontar, sambal cumi, kelapa tart, dan tumpeng. Dibuat dalam jumlah terbatas setiap hari, untuk oleh-oleh, hantaran, atau syukuran keluarga.</p>
+      <a class="btn" href="https://wa.me/6282198827773?text=Halo%20Mama%20Ainun,%20saya%20mau%20pesan">Pesan lewat WhatsApp</a>
+      <p class="menu-line">Pie susu lontar · Sambal cumi · Kelapa tart · Tumpeng</p>
+    </div>
+  </header>
+
+  <main>
+    <!-- PRODUK: salin satu blok <article class="product"> untuk menambah produk -->
+    <section id="menu">
+      <div class="container">
+        <h2>Yang bisa dipesan</h2>
+        <p class="lead">Harga di bawah hanya contoh. Ganti dengan harga asli.</p>
+
+        <article class="product">
+          <div>
+            <div class="thumb t-pie" role="img" aria-label="Pie susu lontar"><img src="pie-susu.jfif" alt="Pie susu lontar buatan Mama Ainun"></div>
+            <h3>Pie Susu Lontar</h3>
+            <p>Kulit pie renyah dengan isian susu yang lembut dan manis pas. Cocok untuk oleh-oleh.</p>
+            <div class="price">Mulai 100k/loyang saja</div>
+            <a class="btn btn-small" href="https://wa.me/6282198827773?text=Halo,%20saya%20mau%20pesan%20Pie%20Susu%20Lontar">Pesan pie susu</a>
+          </div>
+        </article>
+
+        <article class="product">
+            <div class="thumb t-sambal" role="img" aria-label="Sambal cumi"><img src="sambal-cumi.jfif" alt="Sambal cumi buatan Mama Ainun"></div>          <div>
+            <h3>Sambal Cumi</h3>
+            <p>Cumi empuk dalam sambal pedas gurih. Enak dengan nasi hangat, bisa disimpan di kulkas.</p>
+            <div class="price">Mulai Rp35.000 / toples</div>
+            <a class="btn btn-small" href="https://wa.me/6282198827773?text=Halo,%20saya%20mau%20pesan%20Sambal%20Cumi">Pesan sambal cumi</a>
+          </div>
+        </article>
+
+        <article class="product">
+            <div class="thumb t-kelapa" role="img" aria-label="kelapa"><img src="kelapa-tart.jfif" alt="kelapatart khas"></div>          <div>
+            <h3>Kelapa Tart</h3>
+            <p>Tart dengan isian kelapa manis dan aroma wangi. Teman minum teh sore hari.</p>
+            <div class="price">Mulai Rp40.000 / box</div>
+            <a class="btn btn-small" href="https://wa.me/6282198827773?text=Halo,%20saya%20mau%20pesan%20Kelapa%20Tart">Pesan kelapa tart</a>
+          </div>
+        </article>
+
+        <article class="product">
+            <div class="thumb t-tumpeng" role="img" aria-label="Tumpeng"><img src="tumpeng.jfif" alt="Tumpeng buatan Mama Ainun"></div>          <div>
+            <h3>Tumpeng</h3>
+            <p>Nasi kuning dengan lauk lengkap untuk syukuran, ulang tahun, dan acara kantor. Tersedia ukuran kecil sampai besar.</p>
+            <div class="price">Mulai Rp250.000 (untuk 5-8 orang)</div>
+            <p class="note">Pesan minimal 2 hari sebelum acara.</p>
+            <a class="btn btn-small" href="https://wa.me/6282198827773?text=Halo,%20saya%20mau%20tanya%20pesanan%20Tumpeng">Tanya tumpeng</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CARA PESAN -->
+    <section class="how" id="cara-pesan">
+      <div class="container">
+        <h2>Cara pesan</h2>
+        <ol>
+          <li>Klik tombol WhatsApp, lalu sebutkan produk dan jumlahnya.</li>
+          <li>Untuk tumpeng, sebutkan tanggal acara dan jumlah tamu.</li>
+          <li>Mama Ainun akan konfirmasi harga dan ketersediaan.</li>
+          <li>Bayar DP (untuk tumpeng) atau transfer penuh, lalu pesanan diproses.</li>
+          <li>Ambil di rumah atau minta diantar lewat kurir online.</li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- TENTANG -->
+    <section class="about" id="tentang">
+      <div class="container">
+        <h2>Tentang dapur kami</h2>
+        <p>Dapur Mama Ainun bermula dari masakan untuk keluarga dan tetangga. Karena banyak yang bertanya "boleh pesan?", kini semuanya bisa dipesan. Setiap produk dibuat sendiri dari bahan segar, tanpa pengawet.</p>
+        <p>Alamat: Jl. kebon kosong XII, No.70. Buka pesanan setiap hari, 08.00–20.00.</p>
+      </div>
+    </section>
+
+    <!-- KONTAK -->
+    <section class="contact" id="kontak">
+      <div class="container">
+        <h2>Siap pesan?</h2>
+        <p>Kirim pesan lewat WhatsApp. Biasanya dibalas dalam beberapa jam.</p>
+        <a class="btn" href="https://wa.me/6282198827773?text=Halo%20Mama%20Ainun,%20saya%20mau%20pesan">Chat WhatsApp</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Dapur Mama Ainun. Website dibuat oleh Sultan Hasan.</footer>
+
+</body>
+</html>
