@@ -11,13 +11,13 @@
   <style>
     /* ===== 1. WARNA & FONT (ubah di sini) ===== */
     :root {
-      --leaf: #1f4d3a;      /* hijau daun pisang: header, footer */
-      --leaf-soft: #e9f1e6; /* hijau muda: latar section */
-      --turmeric: #f2b705;  /* kuning kunyit: tombol */
-      --chili: #c8321e;     /* merah cabai: harga, label penting */
-      --paper: #fffef9;     /* latar halaman */
-      --ink: #26302b;       /* teks utama */
-      --muted: #5f6b64;     /* teks pendukung */
+      --leaf: #1f4d3a;
+      --leaf-soft: #e9f1e6;
+      --turmeric: #f2b705;
+      --chili: #c8321e;
+      --paper: #fffef9;
+      --ink: #26302b;
+      --muted: #5f6b64;
       --font-head: "Young Serif", Georgia, serif;
       --font-body: "Nunito Sans", system-ui, sans-serif;
     }
@@ -51,28 +51,44 @@
     .hero p { max-width: 48ch; opacity: .92; margin-bottom: 1.8rem; font-size: 1.05rem; }
     .hero .menu-line { margin-top: 2rem; font-size: .95rem; opacity: .8; }
 
-    /* ===== 4. PRODUK ===== */
-    /* Setiap produk: kotak warna di kiri (pengganti foto) + teks di kanan */
+    /* ===== 4. PRODUK =====
+       Setiap produk punya DUA kotak saja:
+       1) .thumb  = kotak foto
+       2) <div>   = kotak teks (judul, deskripsi, harga, tombol)
+       HP: foto di atas, teks di bawah. Layar lebar: foto kiri, teks kanan. */
     .product {
-      display: grid; gap: 1.2rem; padding: 1.6rem 0;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.2rem;
+      padding: 1.8rem 0;
       border-bottom: 1px solid #d9e2d6;
     }
     .product:last-child { border-bottom: 0; }
+
     .thumb {
-      aspect-ratio: 4 / 3; border-radius: 14px; display: grid; place-items: center;
-      font-family: var(--font-head); font-size: 2.6rem; color: rgba(255,255,255,.92);
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      overflow: hidden;
     }
-    .thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 14px; }
-    .t-pie    { background: #d99a3d; }
-    .t-sambal { background: var(--chili); }
-    .t-kelapa { background: #6f9c7a; }
-    .t-tumpeng{ background: #b88a00; }
+    .thumb img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;        /* foto dipotong rapi, tidak gepeng */
+      object-position: center;
+    }
+    /* warna cadangan kalau foto belum termuat */
+    .t-pie     { background: #d99a3d; }
+    .t-sambal  { background: var(--chili); }
+    .t-kelapa  { background: #6f9c7a; }
+    .t-tumpeng { background: #b88a00; }
+
     .product h3 { font-size: 1.4rem; margin-bottom: .3rem; }
     .product p { color: var(--muted); margin-bottom: .6rem; }
     .price { color: var(--chili); font-weight: 800; margin-bottom: .9rem; }
     .note { font-size: .9rem; color: var(--muted); }
 
-    /* ===== 5. CARA PESAN (ini memang urutan langkah) ===== */
+    /* ===== 5. CARA PESAN ===== */
     .how { background: var(--leaf-soft); }
     .how ol { margin-top: 1.5rem; padding-left: 1.3rem; display: grid; gap: .9rem; max-width: 60ch; }
     .how li::marker { color: var(--chili); font-weight: 800; }
@@ -87,7 +103,7 @@
 
     /* ===== 8. LAYAR LEBAR (min. 700px) ===== */
     @media (min-width: 700px) {
-      .product { grid-template-columns: 240px 1fr; gap: 2rem; align-items: center; }
+      .product { grid-template-columns: 260px minmax(0, 1fr); gap: 2rem; align-items: center; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -102,7 +118,6 @@
     <div class="container">
       <div class="topbar">
         <a class="brand" href="#">Dapur Mama Ainun</a>
-        <!-- GANTI 6282198827773 dengan nomor WhatsApp asli (awali 62, tanpa 0 atau +) -->
         <a class="wa" href="https://wa.me/6282198827773">Chat WhatsApp</a>
       </div>
 
@@ -114,15 +129,15 @@
   </header>
 
   <main>
-    <!-- PRODUK: salin satu blok <article class="product"> untuk menambah produk -->
     <section id="menu">
       <div class="container">
         <h2>Yang bisa dipesan</h2>
         <p class="lead">Harga di bawah hanya contoh. Ganti dengan harga asli.</p>
 
+        <!-- PRODUK 1: PIE SUSU -->
         <article class="product">
+          <div class="thumb t-pie" role="img" aria-label="Pie susu lontar"><img src="pie-susu.jfif" alt="Pie susu lontar buatan Mama Ainun"></div>
           <div>
-            <div class="thumb t-pie" role="img" aria-label="Pie susu lontar"><img src="pie-susu.jfif" alt="Pie susu lontar buatan Mama Ainun"></div>
             <h3>Pie Susu Lontar</h3>
             <p>Kulit pie renyah dengan isian susu yang lembut dan manis pas. Cocok untuk oleh-oleh.</p>
             <div class="price">Mulai 100k/loyang saja</div>
@@ -130,8 +145,10 @@
           </div>
         </article>
 
+        <!-- PRODUK 2: SAMBAL CUMI -->
         <article class="product">
-            <div class="thumb t-sambal" role="img" aria-label="Sambal cumi"><img src="sambal-cumi.jfif" alt="Sambal cumi buatan Mama Ainun"></div>          <div>
+          <div class="thumb t-sambal" role="img" aria-label="Sambal cumi"><img src="sambal-cumi.jfif" alt="Sambal cumi buatan Mama Ainun"></div>
+          <div>
             <h3>Sambal Cumi</h3>
             <p>Cumi empuk dalam sambal pedas gurih. Enak dengan nasi hangat, bisa disimpan di kulkas.</p>
             <div class="price">Mulai Rp35.000 / toples</div>
@@ -139,8 +156,10 @@
           </div>
         </article>
 
+        <!-- PRODUK 3: KELAPA TART -->
         <article class="product">
-            <div class="thumb t-kelapa" role="img" aria-label="kelapa"><img src="kelapa-tart.jfif" alt="kelapatart khas"></div>          <div>
+          <div class="thumb t-kelapa" role="img" aria-label="Kelapa tart"><img src="kelapa-tart.jfif" alt="Kelapa tart buatan Mama Ainun"></div>
+          <div>
             <h3>Kelapa Tart</h3>
             <p>Tart dengan isian kelapa manis dan aroma wangi. Teman minum teh sore hari.</p>
             <div class="price">Mulai Rp40.000 / box</div>
@@ -148,8 +167,10 @@
           </div>
         </article>
 
+        <!-- PRODUK 4: TUMPENG -->
         <article class="product">
-            <div class="thumb t-tumpeng" role="img" aria-label="Tumpeng"><img src="tumpeng.jfif" alt="Tumpeng buatan Mama Ainun"></div>          <div>
+          <div class="thumb t-tumpeng" role="img" aria-label="Tumpeng"><img src="tumpeng.jfif" alt="Tumpeng buatan Mama Ainun"></div>
+          <div>
             <h3>Tumpeng</h3>
             <p>Nasi kuning dengan lauk lengkap untuk syukuran, ulang tahun, dan acara kantor. Tersedia ukuran kecil sampai besar.</p>
             <div class="price">Mulai Rp250.000 (untuk 5-8 orang)</div>
